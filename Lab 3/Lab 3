@@ -1,1 +1,25 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
 
+long double fun(double x, int n, long double pre_total = 1)
+{
+	if (n == 0) return x;
+	for (int j = 1; j <= 2 * n + 1; j++) pre_total *= x / j;
+	return pre_total + fun(x, --n);
+}
+
+int main()
+{
+	setlocale(0, "Rus");
+	int n = 20;
+	double x, a, b;
+	cout << "Введите границы a and b" << endl;
+	cin >> a >> b;
+	for (x = a;x < b; x += (b - a) / 10)
+	{
+		cout << "X=" << x << setprecision(15) << " SN=" << fun(x, n) << setprecision(15) << setprecision(15) << " Y=" << (exp(x) - exp(-x)) / 2 << endl;
+	}
+
+	return 0;
+}

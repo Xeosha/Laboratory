@@ -1,0 +1,40 @@
+void ShallSort(int* arr, int size)
+{
+    int i, j, step, tmp;
+    for (step = size / 2; step > 0; step /= 2)
+        for (i = step; i < size; i++)
+        {
+            tmp = arr[i];
+            for (j = i; j >= step; j -= step)
+            {
+                if (tmp < arr[j - step])
+                    arr[j] = arr[j - step];
+                else
+                    break;
+            }
+            arr[j] = tmp;
+        }
+}
+
+void qsort(int* array, int size)
+{
+    int i = 0;
+    int j = size - 1;
+    int mid = array[size / 2];
+    do {
+        while (array[i] < mid) i++;
+        while (array[j] > mid) j--;
+        if (i <= j) {
+            int tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++; j--;
+        }
+    } while (i <= j);
+    if (j > 0) {
+        qsort(array, j + 1);
+    }
+    if (i < size) {
+        qsort(&array[i], size - i);
+    }
+}
